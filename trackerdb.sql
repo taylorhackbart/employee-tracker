@@ -6,34 +6,23 @@ CREATE DATABASE tracker_db;
 USE tracker_db;
 --CREATE DEPARTMENT TABLE--
 CREATE TABLE department (
-  id INTEGER(10) NOT NULL AUTO_INCREMENT,
+  id INT UNSIGNED NOT NULL PRIMARY KEY,
   name VARCHAR(30),
   PRIMARY KEY (id)
 );
 --CREATE ROLE TABLE--
 CREATE TABLE role (
-  id INTEGER(10) NOT NULL AUTO_INCREMENT,
+  id INT UNSIGNED NOT NULL PRIMARY KEY,
   title VARCHAR(30) NOT NULL,
   salary DECIMAL,
-  department_id INTEGER(10),
-  PRIMARY KEY (id)
+  department_id INT UNSIGNED NOT NULL
 );
 --CREATE EMPLOYEE TABLE 
 
 CREATE TABLE employee (
-  id INTEGER(10) NOT NULL AUTO_INCREMENT,
+  id INT UNSIGNED NOT NULL PRIMARY KEY,
   first_name VARCHAR(30) NOT NULL, 
   last_name VARCHAR(30) NOT NULL, 
-  role_id INTEGER(10), NOT NULL,
-  manager_id INTEGER(10), 
-  PRIMARY KEY (id)
+  role_id INT UNSIGNED NOT NULL,
+  manager_id INT UNSIGNED, 
 );
-
-INSERT INTO department (id, name)
-VALUES ("pizza", 10);
-
-INSERT INTO role (id, title, salary, department_id)
-VALUES ("pizza", 10);
-
-INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
-VALUES ("pizza", 10);
