@@ -24,7 +24,7 @@ function init(){
         employee()
         break;
       case "View All Roles":
-        roles();
+        role();
         break;
       case "View All Departments":
         department();
@@ -49,13 +49,15 @@ function init(){
     console.table(view);
     init();
 }
-  async function roles(){
-    const view = await db.employee()
+  async function role(){
+    const view = await db.role()
     console.table(view);
+    init();
 }
   async function department(){
-    const view = await db.employee()
+    const view = await db.department()
     console.table(view);
+    init();
 }
   async function addEmp(){
     return (inquirer.prompt([
@@ -71,8 +73,8 @@ function init(){
       },
       {
         type: "input",
-        message: "Please enter your role ID",
-        name: "roleid"
+        message: "Please select your role",
+        name: "role"
       },
       {
         type: "input",
@@ -87,14 +89,14 @@ function init(){
         role_id: answers.roleid, 
         manager_id: answers.managerid
       } 
-      await db.addEmployee(data);
-      console.log("added employee")
+       db.addEmployee(data);
+      console.log("Employee added")
       init();
     })
     )
   }
 
-  function addRole(){
+  async function addRole(){
     return (inquirer.prompt ([
       {
         type: "input",
@@ -112,14 +114,31 @@ function init(){
         name: "department",
         choices: ["Sales", "Engineering", "Finance", "Legal"]
       }
-    ])//then statement
+    ]).then(answers => {
+      const data = 
+       {
+        title: answers.title, 
+        salary: answers.salary, 
+        department_id: answers.department, 
+      } 
+       db.addRole(data);
+      console.log("Employee added")
+      init();
+    })
     
     )
   }
-  function updateRole(){
+  async function updateRole(){
     return(inquirer.prompt ([
+      {
+        type: "list",
+        name: "role",
+        message: "What is this employee's new role?",
+        choices: ["Sales", "Finance", "Legal", "Engineer"]
+      }
+    ]).then(answer =>{
 
-    ])//then statement
+    })
     ) 
   
   } 

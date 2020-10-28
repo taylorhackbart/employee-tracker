@@ -5,8 +5,10 @@ class DB {
   constructor(connection){
     this.connection = connection
   }
+
   employee(){
-    return this.connection.query("SELECT * FROM employee")
+    return this.connection.query("SELECT * FROM employee LEFT JOIN role ON employee.role_id = role.title")
+    
   }
   role(){
     return this.connection.query("SELECT * FROM role")
