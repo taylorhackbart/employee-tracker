@@ -24,7 +24,7 @@ class DB {
     return this.connection.query("INSERT INTO role SET ?", data)
   }
   updateRole(data){
-    return this.connection.query("SELECT * FROM role, SELECT * FROM employee,INSERT INTO role SET ?", data)
+    return this.connection.query("INSERT INTO employee SET ?", data)
   }
 
 }

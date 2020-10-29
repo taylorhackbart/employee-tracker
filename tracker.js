@@ -97,7 +97,7 @@ function init(){
     )
   }
     
-  async function addRole(){
+  function addRole(){
     return (inquirer.prompt ([
       {
         type: "input",
@@ -130,17 +130,31 @@ function init(){
     )
   }
   async function updateRole(){
+    console.log("Updating Employee's role...\n")
     return(inquirer.prompt ([
       {
-        type: "list",
+        type: "input",
+        name: "first",
+        message: "What is the employee's first name would you like to update?"
+      },
+      {
+        type: "input",
+        name: "last",
+        message: "What is the employee's last name would you like to update?"
+      },
+      {
+        type: "input",
         name: "role",
-        message: "What is this employee's new role?",
-        choices: ["Sales", "Finance", "Legal", "Engineer"]
+        message: "What is this employee's new role ID?"
       }
-    ]).then(answer =>{
-
+    ]).then(answers =>{
+      var query = connection.query("UPDATE employees SET role_id = " + answers.role + " WHERE first_name = ‘" + answers.first + "’ and last_name = ‘" + answers.last + "`", data)
+     console.log("Employee updated")
+     console.log(data)
+     init();
     })
     ) 
   
   } 
 init();
+
