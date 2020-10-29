@@ -73,7 +73,7 @@ function init(){
       },
       {
         type: "input",
-        message: "Please select your role",
+        message: "Please enter your role number",
         name: "role"
       },
       {
@@ -81,12 +81,13 @@ function init(){
         message: "Please enter your managers ID",
         name: "managerid"
       }
-    ]).then(answers => {
+    ])
+    .then(answers => {
       const data = 
        {
         first_name: answers.firstname, 
         last_name: answers.lastname, 
-        role_id: answers.roleid, 
+        role_id: answers.role, 
         manager_id: answers.managerid
       } 
        db.addEmployee(data);
@@ -95,7 +96,7 @@ function init(){
     })
     )
   }
-
+    
   async function addRole(){
     return (inquirer.prompt ([
       {
@@ -109,10 +110,9 @@ function init(){
         name: "salary"
       },
       {
-        type: "list",
-        message: "What department is this role in?",
+        type: "input",
+        message: "Enter a department ID?",
         name: "department",
-        choices: ["Sales", "Engineering", "Finance", "Legal"]
       }
     ]).then(answers => {
       const data = 
@@ -123,6 +123,7 @@ function init(){
       } 
        db.addRole(data);
       console.log("Employee added")
+      console.log(data)
       init();
     })
     

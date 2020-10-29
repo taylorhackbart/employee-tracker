@@ -6,26 +6,30 @@ CREATE DATABASE tracker_db;
 USE tracker_db;
 
 CREATE TABLE department (
-  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(30)
+  id INT AUTO_INCREMENT,
+  name VARCHAR(30),
+  PRIMARY KEY(id)
 );
 
 CREATE TABLE role (
-  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  id INT AUTO_INCREMENT,
   title VARCHAR(30) NOT NULL,
-  salary DECIMAL,
-  department_id INT UNSIGNED NOT NULL,
-  INDEX depart_ind (department_id)
+  salary INT,
+  department_id INT,
+  FOREIGN KEY(department_id) REFERENCES department(id),
+  PRIMARY KEY(id)
 );
 
 
 CREATE TABLE employee (
-  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  id INT AUTO_INCREMENT,
   first_name VARCHAR(30) NOT NULL, 
   last_name VARCHAR(30) NOT NULL, 
-  role_id INT UNSIGNED NOT NULL,
-  INDEX role_ind (role_id),
-  manager_id INT UNSIGNED NOT NULL
+  role_id INT,
+  manager_id INT,
+  FOREIGN KEY(role_id) REFERENCES role(id),
+  FOREIGN KEY(manager_id) REFERENCES employee(id),
+  PRIMARY KEY(id)
 );
 
 INSERT INTO department(name)
@@ -33,29 +37,29 @@ VALUES ("Sales"), ("Engineering"), ("Finance"), ("Legal");
 
 INSERT INTO role(title, salary, department_id)
 VALUES 
-("Sales Lead", 100000, 1), 
+("Sales Manager", 100000, 1), 
 ("Sales Marketing", 120000, 1), 
-("Engineer Lead", 200000, 2), 
+("Engineer Manager", 200000, 2), 
 ("Software Engineer", 190000, 2), 
-("Fianance Head", 180000, 3), 
+("Finance Manager", 180000, 3), 
 ("Finance Advisor", 150000, 3), 
-("Legal Head", 160000, 4), 
+("Legal Manager", 160000, 4), 
 ("Lawyer", 200000, 4);
 
 
 INSERT INTO employee(first_name, last_name, role_id, manager_id)
 VALUES 
-("Jane", "Doe", 1, 1), 
+("Jane", "Doe", 1, NULL), 
 ("John", "Doe", 2, 1),
 ("Justin", "Coo", 2, 1), 
-("Taylor", "Huckle", 3, 2), 
-("Joe", "Boy", 4, 2), 
-("Ali", "Hue", 4, 2),
-("Jack", "Boot", 5, 3), 
-("Oscar", "Leti", 6, 3), 
-("Terry", "Kurt", 6, 3),
-("Turny", "Bot", 7, 4), 
-("Lisa", "Lozer", 8, 4), 
-("Oggie", "Price", 8, 4);
+("Taylor", "Huckle", 3, NULL), 
+("Joe", "Boy", 4, 4), 
+("Ali", "Hue", 4, 4),
+("Jack", "Boot", 5, NULL), 
+("Oscar", "Leti", 6, 7), 
+("Terry", "Kurt", 6, 7),
+("Turny", "Bot", 7, NULL), 
+("Lisa", "Lozer", 8, 10), 
+("Oggie", "Price", 8, 10);
 
 
