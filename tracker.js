@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 const db = require("./index");
 require("console.table");
-
+// INITIAL PROMPT
 function init() {
   inquirer
     .prompt({
@@ -19,6 +19,7 @@ function init() {
         "Exit",
       ],
     })
+    //SWITCH CASES FOR EACH CHOICE OPTION
     .then(function (res) {
       switch (res.search) {
         case "View All Employees":
@@ -47,21 +48,25 @@ function init() {
       }
     });
 }
+//VIEW EMPLOYEES
 async function employee() {
   const view = await db.employee();
   console.table(view);
   init();
 }
+//VIEW ROLES
 async function role() {
   const view = await db.role();
   console.table(view);
   init();
 }
+//VIEW DEPARTMENTS
 async function department() {
   const view = await db.department();
   console.table(view);
   init();
 }
+//ADD AN EMPLOYEE
 async function addEmp() {
   return inquirer
     .prompt([
@@ -98,7 +103,7 @@ async function addEmp() {
       init();
     });
 }
-
+//ADD A ROLE
 function addRole() {
   return inquirer
     .prompt([
@@ -130,6 +135,7 @@ function addRole() {
       init();
     });
 }
+//UPDATE A ROLE
 async function updateRole() {
   const employees = await db.employee();
   const employeeChoices = employees.map(({id, first_name, last_name}) => ({
@@ -162,7 +168,7 @@ async function updateRole() {
     await db.updateRole(role, first);
     init();
 }
-
+//DELETE AN EMPLOYEE
 async function deleteEmployee(){
   const employees = await db.employee();
   const employeeChoices = employees.map(({id, first_name, last_name}) => ({

@@ -1,16 +1,17 @@
-
 DROP DATABASE IF EXISTS tracker_db;
 
 CREATE DATABASE tracker_db;
 
 USE tracker_db;
 
+--DEPARTMENT TABLE--
 CREATE TABLE department (
   id INT AUTO_INCREMENT,
   name VARCHAR(30),
   PRIMARY KEY(id)
 );
 
+--ROLE TABLE--
 CREATE TABLE role (
   id INT AUTO_INCREMENT,
   title VARCHAR(30) NOT NULL,
@@ -20,7 +21,7 @@ CREATE TABLE role (
   PRIMARY KEY(id)
 );
 
-
+--EMPLOYEE TABLE--
 CREATE TABLE employee (
   id INT AUTO_INCREMENT,
   first_name VARCHAR(30) NOT NULL, 
@@ -32,9 +33,11 @@ CREATE TABLE employee (
   PRIMARY KEY(id)
 );
 
+--DEPARTMENT VALUES--
 INSERT INTO department(name)
 VALUES ("Sales"), ("Engineering"), ("Finance"), ("Legal");
 
+--ROLE VALUES--
 INSERT INTO role(title, salary, department_id)
 VALUES 
 ("Sales Manager", 100000, 1), 
@@ -46,7 +49,7 @@ VALUES
 ("Legal Manager", 160000, 4), 
 ("Lawyer", 200000, 4);
 
-
+--EMPLOYEE VALUES--
 INSERT INTO employee(first_name, last_name, role_id, manager_id)
 VALUES 
 ("Jane", "Doe", 1, NULL), 
