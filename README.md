@@ -18,5 +18,5 @@ To use this application, run npm init-y and then run npm install in your termina
 While the overall assignment was not difficult, referencing the class file and creating proper SELECT and JOIN statements was tricky. 
 
 ## Credits
-My tutor! Tyler is great, and as always, I had help from my classmates.
+Joey and I worked on this together to come up with our functions, and my tutor! Tyler is great, and as always, I had help from the rest of my classmates.
 
